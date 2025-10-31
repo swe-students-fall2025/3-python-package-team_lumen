@@ -1,4 +1,5 @@
-from .core import encode, decode, is_valid, explain
+from .core import encode, decode, is_valid
+from .explain import explain
 
 
 def main():
