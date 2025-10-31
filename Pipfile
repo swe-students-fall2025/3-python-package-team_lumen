@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 pytest = "*"
-morse_code = {file = ".", editable = true}
+morse-code = {file = ".", editable = true}
 
 [dev-packages]
 
