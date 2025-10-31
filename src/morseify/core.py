@@ -1,3 +1,5 @@
+from morseify.mapping import LETTER_TO_MORSE
+
 def encode(text):
     """
     Convert English text to morse code.
@@ -8,7 +10,7 @@ def encode(text):
     Returns:
         Morse code string
     """
-    from morse_code.mapping import LETTER_TO_MORSE
+    
     
     # Normalize the text first(delete after normalize function is implemented)
     if text is None:
