@@ -74,10 +74,25 @@ def decode(morse_code):
 
 
 def is_valid(morse_code):
-    # TODO: Implement validation logic
-    pass
-
-
-
+    # check if morse_code is str or empty
+    try:
+        morse_code = morse_code.strip()
+    except AttributeError:
+        return False
+    
+    if not morse_code:
+        return False
+    
+    #check if valid chars or sequence
+    validchars = {'.', '-', '/', ' '}
+    if any(ch not in validchars for ch in morse_code):
+        return False
+    
+    for seq in morse_code.split(' '):
+        if not seq or seq == '/':
+             continue
+        if seq not in MORSE_TO_LETTER:
+            return False        
+    return True
 
 
