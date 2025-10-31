@@ -12,5 +12,10 @@ def main():
     # print(f"Valid?   {is_valid(encoded)}")
     # print(f"Explain : {explain(encoded)}")
 
+    # text = input("Enter text to encode: ")
+    # encoded = encode(text)
+    # print("Encoded:", encoded)
+    # print("Decoded back:", decode(encoded))
+
 if __name__ == "__main__":
     main()
