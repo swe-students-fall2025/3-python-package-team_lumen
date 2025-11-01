@@ -28,4 +28,4 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [project.scripts]
-morse_code = "morse_code.core:cli"
+morseify = "morseify.cli:cli"
