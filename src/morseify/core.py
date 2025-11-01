@@ -1,5 +1,7 @@
 from morseify.mapping import LETTER_TO_MORSE
 from morseify.mapping import MORSE_TO_LETTER
+from morseify.normalize import normalize_text
+from morseify.normalize import normalize_code
 
 def encode(text):
     """
@@ -13,12 +15,11 @@ def encode(text):
     """
 
     # Normalize the text first(delete after normalize function is implemented)
-    if text is None:
-        return None
-    normalized = text.upper().strip() 
+    # if text is None:
+    #     return None
+    # normalized = text.upper().strip() 
 
-    # change to this:
-    # normalized = normalize_text(text)
+    normalized = normalize_text(text)
     
     # Convert each character to morse code
     result = []
@@ -44,16 +45,17 @@ def decode(morse_code):
         morse_code: Morse code string to decode
         
     Returns:
-        English text string
+        English text string, or error message if morse code is invalid
     """
-    # check if the morse code is valid
-    # valid_morse = is_valid(morse_code)
+    # Check if the morse code is valid
+    if not is_valid(morse_code):
+        return "Morse code is not valid"
     
-    valid_morse = morse_code
+    # If valid: normalize and decode
+    normalized = normalize_code(morse_code)
     
     # Split morse code by spaces to get individual morse sequences
-    morse_words = valid_morse.split(' ')
-    # print(morse_words)
+    morse_words = normalized.split(' ')
     
     result = []
     for i in morse_words:
@@ -73,7 +75,19 @@ def decode(morse_code):
 
 
 
+
+
 def is_valid(morse_code):
+    """
+    Check if morse code is valid.
+    
+    Args:
+        morse_code: Morse code string to check if valid
+        
+    Returns:
+        Boolean: True if valid, False otherwise
+    """
+
     # check if morse_code is str or empty
     try:
         morse_code = morse_code.strip()
