@@ -11,7 +11,22 @@ def test_valid_single():
     assert is_valid("---") is True
 
 def test_valid_multiple():
+    hey = ".... . -.--"
+    bro = "-... .-. ---"
+    i = '..'
+    want = ".-- .- -. -"
+    a = ".-"
+    cat = "-.-. .- -"
+    assert is_valid(hey) is True
+    assert is_valid(bro) is True
+    assert is_valid(i) is True
+    assert is_valid(want) is True
+    assert is_valid(a) is True
+    assert is_valid(cat) is True
+
+def test_valid_seperator():
     morse1 = ".... . -.-- / -... .-. ---"           
     morse2 = ".. / .-- .- -. - / .- / -.-. .- -"   
     assert is_valid(morse1) is True
     assert is_valid(morse2) is True
+
