@@ -25,6 +25,9 @@ def test_decode_numbers():
     assert decode(".---- ..--- ...--") == "123"
     assert decode("-----") == "0"
 
+def test_decode_extra_spaces():
+    """Test decoding morse code with extra spaces."""
+    assert decode("   ...   ---   ...   ") == "SOS"
 
 def test_decode_invalid_morse_code():
     """Test decoding invalid morse code returns error message."""
@@ -50,3 +53,21 @@ def test_decode_normalized_input():
     """Test decoding already normalized morse code."""
     # decode should handle normalization internally
     assert decode("  .... . .-.. .-.. ---  ") == "HELLO"  # Extra spaces
+
+
+
+def test_decode_punctuation_only():
+    """Test decoding morse code with only punctuation."""
+    assert decode(".-.-.-") == "."  # period
+    assert decode("--..--") == ","  # comma
+    assert decode("..--..") == "?"  # question mark
+    assert decode("-..-.") == "/"   # slash
+    assert decode("-....-") == "-"  # hyphen
+
+
+def test_decode_with_parentheses():
+    """Test decoding morse code with parentheses."""
+    assert decode("-.--. -.--.-") == "()"
+    assert decode(".... . .-.. .-.. --- -.--.") == "HELLO("
+    assert decode("-.--.- .-- --- .-. .-.. -..") == ")WORLD"
+
