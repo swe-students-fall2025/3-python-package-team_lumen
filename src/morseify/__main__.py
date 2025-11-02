@@ -1,5 +1,6 @@
 from .core import encode, decode, is_valid
 from .explain import explain
+from .quiz import quiz
 
 
 def main():
