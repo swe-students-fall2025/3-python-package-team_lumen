@@ -1,2 +1,2 @@
-def test_decode():
+def test_encode():
     assert True
