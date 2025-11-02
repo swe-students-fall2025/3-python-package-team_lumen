@@ -95,3 +95,47 @@ def test_encode_empty_string():
     """Test encoding empty string."""
     assert encode("") == ""
 
+
+def test_encode_decode_roundtrip():
+    """Test that encoding then decoding returns the original text."""
+    texts = [
+        "A",
+        "HELLO",
+        "HELLO WORLD",
+        "123",
+        "SOS",
+        "HELLO.",
+        "SOS?",
+        "()",
+        "HELLO(WORLD)",
+        "0123456789"
+    ]
+    
+    for text in texts:
+        encoded = encode(text)
+        decoded = decode(encoded)
+        assert decoded == text, f"Round trip failed for '{text}': {encoded} -> {decoded}"
+
+
+def test_decode_encode_roundtrip():
+    """Test that decoding then encoding returns the original morse code."""
+    morse_codes = [
+        ".-",
+        "-",
+        "...",
+        ".... . .-.. .-.. ---",
+        "... --- ...",
+        ".... . .-.. .-.. --- / .-- --- .-. .-.. -..",
+        ".---- ..--- ...--",
+        "-----",
+        ".... . .-.. .-.. --- .-.-.-",
+        "... --- ... ..--..",
+        "-.--. -.--.-",
+        ".- .-.-.- -..."
+    ]
+    
+    for morse_code in morse_codes:
+        decoded = decode(morse_code)
+        encoded = encode(decoded)
+        assert encoded == morse_code, f"Round trip failed for '{morse_code}': {decoded} -> {encoded}"
+        
