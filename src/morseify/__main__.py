@@ -29,13 +29,18 @@ def main():
         else:
             print(f"✗ Round-trip failed! Expected: '{text}'")
     
-    # Uncomment for interactive mode
-    # print("\nInteractive mode:")
-    # text = input("Enter text to encode: ")
-    # encoded = encode(text)
-    # print(f"Encoded: {encoded}")
-    # decoded = decode(encoded)
-    # print(f"Decoded: {decoded}")
+    # Example of explain feature with user input
+    print("Explain Feature")
+    user_morse = input("Enter morse code to explain: ").strip()
+    if user_morse:
+        explanation = explain(user_morse)
+        print(explanation)
+    else:
+        print("No input provided. Using example:")
+        example_morse = ".... . .-.. .-.. --- / .-- --- .-. .-.. -.."
+        explanation = explain(example_morse)
+        print(explanation)
+
 
 if __name__ == "__main__":
     main()
