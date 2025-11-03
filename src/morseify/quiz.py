@@ -2,7 +2,7 @@ import random
 import sys
 from pathlib import Path
 
-# Add parent directory to path if running as script
+
 if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).parent.parent))
 
@@ -11,7 +11,6 @@ try:
 except ModuleNotFoundError:
     from .core import encode, decode, is_valid
 
-# List of sentences for the quiz
 QUIZ_SENTENCES = [
     "HELLO WORLD",
     "LET US TRY",
@@ -26,21 +25,18 @@ QUIZ_SENTENCES = [
 ]
 
 
-def quiz(sentence=None, mode=None):
+def quiz(mode=None):
     """
     Interactive morse code quiz.
     
     Args:
-        sentence: Optional - specific sentence to use, or None for random
         mode: Optional - 'reading' or 'writing', or None to ask
     """
-    if sentence is None:
-        selected_sentence = random.choice(QUIZ_SENTENCES)
-    else:
-        selected_sentence = sentence.upper().strip()
+    # Always use a random sentence
+    selected_sentence = random.choice(QUIZ_SENTENCES)
     
 
-    # Ask for mode if not provided
+
     if mode is None:
         print("\n" + "=" * 60)
         print("MORSE CODE QUIZ")
@@ -64,7 +60,6 @@ def quiz(sentence=None, mode=None):
         print(f"\nMorse code: {morse_to_decode}")
         print()
         
-        # Loop until correct or user gives up
         while True:
             answer = input("Your answer: ").upper().strip()
             
@@ -75,9 +70,17 @@ def quiz(sentence=None, mode=None):
                 print("\nIncorrect!")
                 retry = input("Try again? (yes/no): ").strip().lower()
                 
+                # Validate yes/no input
+                while retry not in ['yes', 'no']:
+                    print("Please enter 'yes' or 'no'")
+                    retry = input("Try again? (yes/no): ").strip().lower()
+                
                 if retry == 'yes':
+
+                    print(f"\nMorse code: {morse_to_decode}")
+                    print()
                     continue  # Try again
-                else:  # 'no' or anything else means give up
+                else: 
                     print("\n" + "-" * 60)
                     print("ANSWER REVEALED")
                     print("-" * 60)
@@ -87,25 +90,23 @@ def quiz(sentence=None, mode=None):
                     print("-" * 60)
                     break
     
-    else:  # writing mode
+    else:  
         print("WRITING MODE: Encode text → morse code")
         print("=" * 60)
         print(f"\nText to encode: {selected_sentence}")
         print()
         correct_morse = encode(selected_sentence)
         
-        # Loop until correct or user gives up
+        
         while True:
             answer = input("Your answer: ").strip()
             
-            # Validate morse code format first
             while not is_valid(answer):
                 print("\nInvalid morse code format!")
                 print("Please use only dots (.), dashes (-), spaces, and slashes (/)")
                 print("Example: ... --- ... (for SOS)")
                 answer = input("\nYour answer: ").strip()
-            
-            # Check if correct
+        
             if answer == correct_morse:
                 print("\nCorrect! Well done!")
                 break
@@ -113,9 +114,16 @@ def quiz(sentence=None, mode=None):
                 print("\nIncorrect!")
                 retry = input("Try again? (yes/no): ").strip().lower()
                 
+                # Validate yes/no input
+                while retry not in ['yes', 'no']:
+                    print("Please enter 'yes' or 'no'")
+                    retry = input("Try again? (yes/no): ").strip().lower()
+                
                 if retry == 'yes':
-                    continue  # Try again
-                else:  # 'no' or anything else means give up
+                    print(f"\nText to encode: {selected_sentence}")
+                    print()
+                    continue  
+                else:  
                     print("\n" + "-" * 60)
                     print("ANSWER REVEALED")
                     print("-" * 60)
