@@ -14,11 +14,46 @@ def explain(morse_message):
     Returns:
         String containing the step-by-step breakdown
     """
-    #Step 1: input validation
+    #input validation
     if not is_valid(morse_message):
         return "Error: Invalid Morse code message. Please check the format."
     
-    #Step 2: Normalize the morse code
+    #morse code normalization
     normalized = normalize_code(morse_message)
+
+    #explainaion building
+    explanation = []
+    explanation.append("=" * 50)
+    explanation.append("MORSE CODE BREAKDOWN")
+    explanation.append("=" * 50)
+    explanation.append(f"Input: {morse_message}")
     
-    pass
+    if normalized != morse_message.strip():
+        explanation.append(f"Normalized: {normalized}")
+    
+    explanation.append("\nStep-by-step translation:")
+    explanation.append("-" * 30)
+    
+    #Process each morse sequence
+    sequences = normalized.split(' ')
+    result_chars = []
+    
+    for seq in sequences:
+        if seq == '':
+            continue
+        elif seq == '/':
+            explanation.append("  /        → [SPACE]")
+            result_chars.append(' ')
+        else:
+            letter = MORSE_TO_LETTER.get(seq, '?')
+            explanation.append(f"  {seq:<8} → {letter}")
+            result_chars.append(letter)
+
+    #show the final result
+    explanation.append("-" * 30)
+    explanation.append(f"\nFinal message: {(''.join(result_chars))}")
+    explanation.append("=" * 50)
+    
+    return '\n'.join(explanation)
+    
+    #pass
