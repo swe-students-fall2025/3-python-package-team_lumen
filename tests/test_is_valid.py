@@ -41,5 +41,16 @@ def test_emptywhite_space():
     assert is_valid(None) is False
 
 def test_valid_morse_extraspace():
-    morse = ".... . .-.. .-.. ---   / .-- --- .-. .-.. -.."
+    morse = ".... . .-.. .-.. ---   /  .-- --- .-. .-.. -.."
     assert is_valid(morse) is True
+
+def test_invalid_morse_seq():
+    assert is_valid("...---...-") is False
+
+def test_slashspace_only():
+    assert is_valid("/") is True
+    assert is_valid(" / ") is True
+
+def test_mix_validinvalid_seq():
+    assert is_valid(".- / x") is False
+    assert is_valid(".- / .--.-") is False
