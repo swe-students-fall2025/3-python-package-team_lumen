@@ -24,7 +24,7 @@ def test_valid_multiple():
     assert is_valid(a) is True
     assert is_valid(cat) is True
 
-def test_valid_seperator():
+def test_valid_separator():
     morse1 = ".... . -.-- / -... .-. ---"           
     morse2 = ".. / .-- .- -. - / .- / -.-. .- -"   
     assert is_valid(morse1) is True
@@ -54,3 +54,8 @@ def test_slashspace_only():
 def test_mix_validinvalid_seq():
     assert is_valid(".- / x") is False
     assert is_valid(".- / .--.-") is False
+
+def test_multiple_separators():
+    assert is_valid(".... / ....") is True
+    assert is_valid("....   ....") is True
+    assert is_valid(".... // ....") is False
