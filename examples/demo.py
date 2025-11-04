@@ -13,6 +13,21 @@ from morseify import encode, decode, normalize_text, normalize_code, is_valid, e
 def main():
     print("Demo")
 
+    # encode & decode
+    text = "HELLO WORLD"
+    encoded = encode(text)
+    decoded = decode(encoded)
+    print(f"Original: {text}")
+    print(f"Encoded : {encoded}")
+    print(f"Decoded : {decoded}\n")
+
+    # normalization
+    messy_text = "HeLLo   WoRLd!!!"
+    print("Normalized text:", normalize_text(messy_text))
+    print("Normalized code:", normalize_code(".... . .-.. .-.. --- / .-- --- .-. .-.. -..  "))
+
+    # validating
+    print("\nValid Morse?", is_valid(encoded))
 
 if __name__ == "__main__":
     main()
