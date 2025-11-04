@@ -7,9 +7,9 @@ if __name__ == "__main__":
     sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
-    from morseify.core import encode, decode, is_valid
+    from morseify.core import encode, decode
 except ModuleNotFoundError:
-    from .core import encode, decode, is_valid
+    from .core import encode, decode
 
 QUIZ_SENTENCES = [
     "HELLO WORLD",
@@ -101,12 +101,15 @@ def quiz(mode=None):
         while True:
             answer = input("Your answer: ").strip()
             
-            while not is_valid(answer):
+            # Check if answer contains only valid morse characters
+            valid_chars = set(".- /")
+            while not all(char in valid_chars for char in answer) or not answer:
                 print("\nInvalid morse code format!")
                 print("Please use only dots (.), dashes (-), spaces, and slashes (/)")
                 print("Example: ... --- ... (for SOS)")
                 answer = input("\nYour answer: ").strip()
         
+            # Now check if the answer is correct (don't validate if it's real morse)
             if answer == correct_morse:
                 print("\nCorrect! Well done!")
                 break
