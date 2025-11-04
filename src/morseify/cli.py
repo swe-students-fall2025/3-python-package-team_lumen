@@ -13,43 +13,71 @@ def cli():
     Command-line interface for morseify.
     Auto-detects whether input is text (encode) or morse code (decode).
     Supports --explain flag for step-by-step breakdown.
+    Supports --quiz flag for interactive quiz.
     
     Usage:
         morseify "HELLO"           # Encodes text to morse code
         morseify ".... . .-.. .-.. ---"  # Decodes morse code to text
         morseify --explain ".... . .-.. .-.. ---"  # Explains morse code
         morseify -e ".... . .-.. .-.. ---"  # Short form for explain
+        morseify --quiz             # Start interactive quiz (mode selection) -- prompts user to select mode
+        morseify --quiz-reading     # Start quiz in reading mode
+        morseify --quiz-writing     # Start quiz in writing mode
+        morseify -q                 # Short form for quiz
     """
+
+
+    
     if len(sys.argv) < 2:
-        print("Usage: morseify [--explain|-e] <text or morse code>")
-        print("Examples:")
+        print("Usage: morseify [OPTIONS] <text or morse code>")
+        print("\nOptions:")
+        print("  --explain, -e        Explain morse code step-by-step")
+        print("  --quiz, -q           Start interactive quiz (mode selection)")
+        print("  --quiz-reading       Start quiz in reading mode (decode)")
+        print("  --quiz-writing       Start quiz in writing mode (encode)")
+        print("\nExamples:")
         print('  morseify "HELLO"')
         print('  morseify ".... . .-.. .-.. ---"')
         print('  morseify --explain ".... . .-.. .-.. ---"')
         print('  morseify -e ".... . .-.. .-.. ---"')
+        print('  morseify --quiz')
+        print('  morseify --quiz-reading')
+        print('  morseify --quiz-writing')
         sys.exit(1)
     
-    # Check for explain flag
-    explain_mode = False
+    # Check for flags
     args = sys.argv[1:]
+    first_arg = args[0]
     
-    if args[0] in ['--explain', '-e']:
-        explain_mode = True
+    # Handle quiz flags
+    if first_arg in ['--quiz', '-q']:
+        quiz()  # Interactive mode selection
+        return
+    
+    if first_arg == '--quiz-reading':
+        quiz('reading')
+        return
+    
+    if first_arg == '--quiz-writing':
+        quiz('writing')
+        return
+    
+    # Handle explain flag
+    if first_arg in ['--explain', '-e']:
         args = args[1:]  # Remove the flag
-    
-    if not args:
-        print("Error: No input provided after flag.")
-        print("Usage: morseify --explain <morse code>")
-        sys.exit(1)
-    
-    # Join all arguments in case user passes multiple words
-    input_text = ' '.join(args)
-    
-    # If explain mode is requested
-    if explain_mode:
+        
+        if not args:
+            print("Error: No input provided after flag.")
+            print("Usage: morseify --explain <morse code>")
+            sys.exit(1)
+        
+        input_text = ' '.join(args)
         result = explain(input_text)
         print(result)
         return
+    
+    # Join all arguments in case user passes multiple words
+    input_text = ' '.join(args)
     
     # Auto-detect: if input contains only morse characters (., -, /, space), decode it
     # Otherwise, encode it
