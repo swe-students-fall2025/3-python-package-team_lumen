@@ -21,6 +21,9 @@ def normalize_text(text):
     allowed_chars = string.ascii_uppercase + string.digits + ' ' + morse_punct
     cleaned = ''.join(ch for ch in text if ch in allowed_chars)
 
+    # collapse repeated punctuation marks
+    cleaned = re.sub(r'([.,?/\-()])\1+', r'\1', cleaned)
+    
     # clean multiple or leading/trailing spaces
     cleaned = re.sub(r'\s+', ' ', cleaned)
     cleaned = cleaned.strip()
