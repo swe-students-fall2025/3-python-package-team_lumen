@@ -1,6 +1,7 @@
 from .core import encode, decode, is_valid
 from .explain import explain
 from .quiz import quiz
+from .normalize import normalize_text, normalize_code
 
 
 def main():
@@ -47,7 +48,69 @@ def main():
         explanation = explain(morse_code)
         print(explanation)
     
+    print("\n" + "=" * 60)
+    print("IS_VALID FUNCTION DEMO")
     
+    valid_examples = [
+        ".... . .-.. .-.. ---",
+        "... --- ...",
+        ".- / -...",
+        ".... . .-.. .-.. --- / .-- --- .-. .-.. -.."
+    ]
+    
+    invalid_examples = [
+        ".... x .-.. .-.. ---",  # Invalid character 'x'
+        ".... . .-.. .-.. ------",  # Invalid sequence
+        "abc",  # Not morse code
+        "123",  # Not morse code
+        ""  # Empty string
+    ]
+    
+    print("\nValid morse code examples:")
+    for morse in valid_examples:
+        result = is_valid(morse)
+        status = "✓ Valid" if result else "✗ Invalid"
+        print(f"  '{morse}' → {status}")
+    
+    print("\nInvalid morse code examples:")
+    for morse in invalid_examples:
+        result = is_valid(morse)
+        status = "✓ Valid" if result else "✗ Invalid"
+        print(f"  '{morse}' → {status}")
+    
+    print("\n" + "=" * 60)
+    print("NORMALIZE FUNCTIONS DEMO")
+    
+    print("\nnormalize_text() examples:")
+    text_examples = [
+        "  hello world  ",
+        "Hello World",
+        "HELLO   WORLD",
+        "hello!!!world",
+        "Hello, World!",
+        "123  ABC"
+    ]
+    
+    for text in text_examples:
+        normalized = normalize_text(text)
+        print(f"  Input:    '{text}'")
+        print(f"  Output:   '{normalized}'")
+        print()
+    
+    print("normalize_code() examples:")
+    code_examples = [
+        "  .... . .-.. .-.. ---  ",
+        "....   .   .-..   .-..   ---",
+        ".... . .-.. .-.. ---//.-- --- .-. .-.. -..",
+        "... --- ...   ",
+        "\t.... . .-.. .-.. ---\t"
+    ]
+    
+    for code in code_examples:
+        normalized = normalize_code(code)
+        print(f"  Input:    '{code}'")
+        print(f"  Output:   '{normalized}'")
+        print()
 
     print("\n" + "=" * 60)
     print("QUIZ FEATURE DEMO")
