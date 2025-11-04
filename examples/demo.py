@@ -29,5 +29,13 @@ def main():
     # validating
     print("\nValid Morse?", is_valid(encoded))
 
+    # explain
+    print("\nExplain:")
+    print(explain(encoded))
+
+    # quiz
+    print("\nQuiz (read & write):")
+    quiz()
+
 if __name__ == "__main__":
     main()
