@@ -14,12 +14,15 @@ def cli():
     Auto-detects whether input is text (encode) or morse code (decode).
     Supports --explain flag for step-by-step breakdown.
     Supports --quiz flag for interactive quiz.
+    Supports --validate flag to check if morse code is valid.
     
     Usage:
         morseify "HELLO"           # Encodes text to morse code
         morseify ".... . .-.. .-.. ---"  # Decodes morse code to text
         morseify --explain ".... . .-.. .-.. ---"  # Explains morse code
         morseify -e ".... . .-.. .-.. ---"  # Short form for explain
+        morseify --validate ".... . .-.. .-.. ---"  # Check if morse code is valid
+        morseify -v ".... . .-.. .-.. ---"  # Short form for validate
         morseify --quiz             # Start interactive quiz (mode selection) -- prompts user to select mode
         morseify --quiz-reading     # Start quiz in reading mode
         morseify --quiz-writing     # Start quiz in writing mode
@@ -32,6 +35,7 @@ def cli():
         print("Usage: morseify [OPTIONS] <text or morse code>")
         print("\nOptions:")
         print("  --explain, -e        Explain morse code step-by-step")
+        print("  --validate, -v       Check if morse code is valid")
         print("  --quiz, -q           Start interactive quiz (mode selection)")
         print("  --quiz-reading       Start quiz in reading mode (decode)")
         print("  --quiz-writing       Start quiz in writing mode (encode)")
@@ -40,6 +44,8 @@ def cli():
         print('  morseify ".... . .-.. .-.. ---"')
         print('  morseify --explain ".... . .-.. .-.. ---"')
         print('  morseify -e ".... . .-.. .-.. ---"')
+        print('  morseify --validate ".... . .-.. .-.. ---"')
+        print('  morseify -v ".... . .-.. .-.. ---"')
         print('  morseify --quiz')
         print('  morseify --quiz-reading')
         print('  morseify --quiz-writing')
@@ -74,6 +80,26 @@ def cli():
         input_text = ' '.join(args)
         result = explain(input_text)
         print(result)
+        return
+    
+    # Handle validate flag
+    if first_arg in ['--validate', '-v']:
+        args = args[1:]  # Remove the flag
+        
+        if not args:
+            print("Error: No input provided after flag.")
+            print("Usage: morseify --validate <morse code>")
+            sys.exit(1)
+        
+        input_text = ' '.join(args)
+        is_morse_valid = is_valid(input_text)
+        
+        if is_morse_valid:
+            print(f"✓ Valid morse code: '{input_text}'")
+            print("The morse code you entered means: ", decode(input_text))
+        else:
+            print(f"✗ Invalid morse code: '{input_text}'")
+            
         return
     
     # Join all arguments in case user passes multiple words
