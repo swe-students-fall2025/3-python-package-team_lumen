@@ -34,21 +34,6 @@ def main():
             print(f"✗ Round-trip failed! Expected: '{text}'")
 
     print("\n" + "=" * 60)
-    print("EXPLAIN FEATURE DEMO")
-    
-    explain_examples = [
-        ".... . .-.. .-.. ---",
-        ".... . .-.. .-.. --- / .-- --- .-. .-.. -..",
-        "... --- ...",
-        ".--. -.-- - .... --- -."
-    ]
-    
-    for i, morse_code in enumerate(explain_examples, 1):
-        print(f"\nExample {i}:")
-        explanation = explain(morse_code)
-        print(explanation)
-    
-    print("\n" + "=" * 60)
     print("IS_VALID FUNCTION DEMO")
     
     valid_examples = [
@@ -112,6 +97,21 @@ def main():
         print(f"  Output:   '{normalized}'")
         print()
 
+    print("\n" + "=" * 60)
+    print("EXPLAIN FEATURE DEMO")
+    
+    explain_examples = [
+        ".... . .-.. .-.. ---",
+        ".... . .-.. .-.. --- / .-- --- .-. .-.. -..",
+        "... --- ...",
+        ".--. -.-- - .... --- -."
+    ]
+    
+    for i, morse_code in enumerate(explain_examples, 1):
+        print(f"\nExample {i}:")
+        explanation = explain(morse_code)
+        print(explanation)
+    
     print("\n" + "=" * 60)
     print("QUIZ FEATURE DEMO")
     print("\nThe quiz feature is interactive and allows you to practice:")
