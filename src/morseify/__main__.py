@@ -9,14 +9,28 @@ def main():
     
     # Encode/Decode Test Section
 
+    
+
     print("ENCODE/DECODE TEST")
+
+     # Showcase encode and decode
+    print("\nEncode Examples:")
+    encode_examples = ["HELLO", "SOS", "PYTHON"]
+    for text in encode_examples:
+        encoded = encode(text)
+        print(f"  '{text}' → '{encoded}'")
+    
+    print("\nDecode Examples:")
+    decode_examples = [".... . .-.. .-.. ---", "... --- ...", ".--. -.-- - .... --- -."]
+    for morse in decode_examples:
+        decoded = decode(morse)
+        print(f"  '{morse}' → '{decoded}'")
+    
+
     test_cases = [
-        "HELLO",
         "HELLO WORLD",
-        "SOS",
         "PYTHON",
         "123",
-        "A1B2C3"
     ]
     
     for text in test_cases:
