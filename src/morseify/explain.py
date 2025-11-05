@@ -23,16 +23,13 @@ def explain(morse_message):
 
     #explainaion building
     explanation = []
-    explanation.append("=" * 50)
     explanation.append("MORSE CODE BREAKDOWN")
-    explanation.append("=" * 50)
     explanation.append(f"Input: {morse_message}")
     
     if normalized != morse_message.strip():
         explanation.append(f"Normalized: {normalized}")
     
     explanation.append("\nStep-by-step translation:")
-    explanation.append("-" * 30)
     
     #Process each morse sequence
     sequences = normalized.split(' ')
@@ -48,11 +45,9 @@ def explain(morse_message):
             letter = MORSE_TO_LETTER.get(seq, '?')
             explanation.append(f"  {seq:<8} → {letter}")
             result_chars.append(letter)
-
+    
     #show the final result
-    explanation.append("-" * 30)
     explanation.append(f"\nFinal message: {(''.join(result_chars))}")
-    explanation.append("=" * 50)
     
     return '\n'.join(explanation)
     

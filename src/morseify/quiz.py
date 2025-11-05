@@ -38,9 +38,7 @@ def quiz(mode=None):
 
 
     if mode is None:
-        print("\n" + "=" * 60)
-        print("MORSE CODE QUIZ")
-        print("=" * 60)
+        print("\nMORSE CODE QUIZ")
         print("Choose your mode:")
         print("'reading'  - Decode morse code → text")
         print("'writing'  - Encode text → morse code")
@@ -52,10 +50,9 @@ def quiz(mode=None):
             print("Please enter 'reading' or 'writing'")
             mode = input("\nEnter the mode: ").strip().lower()
     
-    print("\n" + "=" * 60)
+    print()
     if mode == 'reading':
         print("READING MODE: Decode morse code → text")
-        print("=" * 60)
         morse_to_decode = encode(selected_sentence)
         print(f"\nMorse code: {morse_to_decode}")
         print()
@@ -67,7 +64,7 @@ def quiz(mode=None):
                 print("\nCorrect! Well done!")
                 break
             else:
-                print("\nIncorrect!")
+                print("\nIncorrect!\n")
                 retry = input("Try again? (yes/no): ").strip().lower()
                 
                 # Validate yes/no input
@@ -81,18 +78,15 @@ def quiz(mode=None):
                     print()
                     continue  # Try again
                 else: 
-                    print("\n" + "-" * 60)
-                    print("ANSWER REVEALED")
-                    print("-" * 60)
+                    print("\nANSWER REVEALED")
                     print(f"Your answer:    {answer}")
                     print(f"Correct answer: {selected_sentence}")
                     print(f"\nThe morse code '{morse_to_decode}' translates to '{selected_sentence}'")
-                    print("-" * 60)
                     break
     
     else:  
+        print("")
         print("WRITING MODE: Encode text → morse code")
-        print("=" * 60)
         print(f"\nText to encode: {selected_sentence}")
         print()
         correct_morse = encode(selected_sentence)
@@ -114,7 +108,7 @@ def quiz(mode=None):
                 print("\nCorrect! Well done!")
                 break
             else:
-                print("\nIncorrect!")
+                print("\nIncorrect!\n")
                 retry = input("Try again? (yes/no): ").strip().lower()
                 
                 # Validate yes/no input
@@ -127,16 +121,13 @@ def quiz(mode=None):
                     print()
                     continue  
                 else:  
-                    print("\n" + "-" * 60)
-                    print("ANSWER REVEALED")
-                    print("-" * 60)
+                    print("\nANSWER REVEALED")
                     print(f"Your answer:    {answer}")
                     print(f"Correct answer: {correct_morse}")
                     print(f"\n'{selected_sentence}' in morse code is: {correct_morse}")
-                    print("-" * 60)
                     break
     
-    print("=" * 60)
+    # print("=" * 60)
 
 
 if __name__ == "__main__":
