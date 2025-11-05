@@ -9,14 +9,28 @@ def main():
     
     # Encode/Decode Test Section
 
+    
+
     print("ENCODE/DECODE TEST")
+
+     # Showcase encode and decode
+    print("\nEncode Examples:")
+    encode_examples = ["HELLO", "SOS", "PYTHON"]
+    for text in encode_examples:
+        encoded = encode(text)
+        print(f"  '{text}' → '{encoded}'")
+    
+    print("\nDecode Examples:")
+    decode_examples = [".... . .-.. .-.. ---", "... --- ...", ".--. -.-- - .... --- -."]
+    for morse in decode_examples:
+        decoded = decode(morse)
+        print(f"  '{morse}' → '{decoded}'")
+    
+
     test_cases = [
-        "HELLO",
         "HELLO WORLD",
-        "SOS",
         "PYTHON",
         "123",
-        "A1B2C3"
     ]
     
     for text in test_cases:
@@ -33,21 +47,6 @@ def main():
         else:
             print(f"✗ Round-trip failed! Expected: '{text}'")
 
-    print("\n" + "=" * 60)
-    print("EXPLAIN FEATURE DEMO")
-    
-    explain_examples = [
-        ".... . .-.. .-.. ---",
-        ".... . .-.. .-.. --- / .-- --- .-. .-.. -..",
-        "... --- ...",
-        ".--. -.-- - .... --- -."
-    ]
-    
-    for i, morse_code in enumerate(explain_examples, 1):
-        print(f"\nExample {i}:")
-        explanation = explain(morse_code)
-        print(explanation)
-    
     print("\n" + "=" * 60)
     print("IS_VALID FUNCTION DEMO")
     
@@ -112,6 +111,21 @@ def main():
         print(f"  Output:   '{normalized}'")
         print()
 
+    print("\n" + "=" * 60)
+    print("EXPLAIN FEATURE DEMO")
+    
+    explain_examples = [
+        ".... . .-.. .-.. ---",
+        ".... . .-.. .-.. --- / .-- --- .-. .-.. -..",
+        "... --- ...",
+        ".--. -.-- - .... --- -."
+    ]
+    
+    for i, morse_code in enumerate(explain_examples, 1):
+        print(f"\nExample {i}:")
+        explanation = explain(morse_code)
+        print(explanation)
+    
     print("\n" + "=" * 60)
     print("QUIZ FEATURE DEMO")
     print("\nThe quiz feature is interactive and allows you to practice:")
