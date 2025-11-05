@@ -4,11 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pytest = "*"
-morse-code = {file = ".", editable = true}
+morseify-lumen = {file = ".", editable = true}
 
 [dev-packages]
 pytest = "*"
+pytest-cov = "*"
 build = "*"
 twine = "*"
 
