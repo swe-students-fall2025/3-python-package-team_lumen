@@ -1,4 +1,3 @@
-import pytest
 from morseify.normalize import normalize_code
 def test_normalize_code_basic():
     assert normalize_code(".- -... / -.-.") == ".- -... / -.-."
