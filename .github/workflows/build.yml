@@ -35,7 +35,7 @@ jobs:
           pipenv run python -m pytest
 
   deliver:
-    if: github.event_name != 'pull_request'
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
     needs: [build]
     runs-on: ubuntu-latest
     timeout-minutes: 5
